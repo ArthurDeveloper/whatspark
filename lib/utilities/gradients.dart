@@ -11,12 +11,8 @@ const LinearGradient defaultGradient = LinearGradient(
 	]
 );
 
-Shader createTextGradient(List<Color>? colors) {
-	if (colors != null) {
-		colors = defaultGradient.colors;
-	}
-
+Shader createTextGradient({ List<Color>? colors }) {
 	return LinearGradient(
-  		colors: colors!,
-	).createShader(const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+  		colors: colors ?? defaultGradient.colors,
+	).createShader(const Rect.fromLTWH(0.0, 0.0, 0.0, 0.0));
 }

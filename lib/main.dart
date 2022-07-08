@@ -1,14 +1,14 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'utilities/gradients.dart';
+import 'widgets/screens/home.dart';
 
 void main() {
-  	runApp(const MyApp());
+	runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-	const MyApp({Key? key}) : super(key: key);
+	MyApp({Key? key}) : super(key: key);
+
+	String colorTheme = 'light';
 
 	@override
 	Widget build(BuildContext context) {
@@ -16,33 +16,10 @@ class MyApp extends StatelessWidget {
 			title: 'Flutter Demo',
 			theme: ThemeData(
 				primarySwatch: Colors.blue,
+				backgroundColor: colorTheme == 'light' ?Colors.white : Colors.black,
 			),
-			home: const Home()
+			home: Home()
 		);
 	}
 }
 
-class Home extends StatelessWidget {
-	const Home({Key? key}) : super(key: key);
-
-	@override
-	Widget build(BuildContext context) {
-		return Scaffold(
-			appBar: AppBar(
-				title: const Text('WhatSpark'),
-				flexibleSpace: Container(
-					decoration: const BoxDecoration(
-						gradient: defaultGradient
-					)
-				)
-			),
-			body: Center(
-				child: Text('WhatSpark', style: TextStyle(
-					foreground: Paint()..shader = createTextGradient(
-						<Color>[const Color(0xffDA44bb), const Color(0xff8921aa)]
-					)
-				)),
-			),
-		);
-	}
-}
