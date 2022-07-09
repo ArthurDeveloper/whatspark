@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utilities/gradients.dart';
 
-AppBar defaultAppBar(String title, { String? subtitle }) {
+AppBar defaultAppBar(String title, { String? subtitle, Widget? leading }) {
 	return AppBar(
 		title: Column(
 			children: <Widget>[
@@ -20,6 +20,7 @@ AppBar defaultAppBar(String title, { String? subtitle }) {
 			decoration: const BoxDecoration(
 				gradient: defaultGradient
 			)
-		)
+		),
+		leading: leading
 	);
 }
