@@ -37,13 +37,12 @@ class Message extends StatelessWidget {
 							width: 1,
 						),
 					),
-
 					borderRadius: BorderRadius.only(
 						topLeft: const Radius.circular(10.0),
 						topRight: const Radius.circular(10.0),
 						bottomLeft: sentBy != 'You' ? const Radius.circular(10.0) : Radius.zero,
 						bottomRight: sentBy == 'You' ? const Radius.circular(10.0) : Radius.zero
-					)
+					),
 				),
 
 				child: Column(

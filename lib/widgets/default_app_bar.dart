@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import '../utilities/gradients.dart';
 
-AppBar defaultAppBar(String title, { String? subtitle, Widget? leading }) {
+AppBar defaultAppBar(String title, { String? subtitle, Widget? leading, List<Widget>? actions }) {
 	return AppBar(
 		title: Column(
+			crossAxisAlignment: CrossAxisAlignment.start,
 			children: <Widget>[
 				Text(title),
 				if(subtitle != null)
-					Container(
-						margin: const EdgeInsets.only(right: 12),
-						child: Text(
-							subtitle, 
-							style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-						)
+					Text(
+						subtitle,
+						style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
 					),
 			]
 		),
@@ -21,6 +19,7 @@ AppBar defaultAppBar(String title, { String? subtitle, Widget? leading }) {
 				gradient: defaultGradient
 			)
 		),
-		leading: leading
+		leading: leading,
+		actions: actions,
 	);
 }
