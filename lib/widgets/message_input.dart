@@ -12,8 +12,8 @@ class MessageInput extends StatefulWidget {
 }
 
 class _MessageInputState extends State<MessageInput> {
-	TextEditingController? content;
-	BorderRadius borderRadius = BorderRadius.circular(40.0);
+	TextEditingController? _content;
+	BorderRadius _borderRadius = BorderRadius.circular(40.0);
 
   	@override
   	Widget build(BuildContext context) {
@@ -23,9 +23,9 @@ class _MessageInputState extends State<MessageInput> {
 					onFocusChange: (bool hasFocus) {
 						setState(() {
 							if (hasFocus) {
-								borderRadius = BorderRadius.circular(10.0);
+								_borderRadius = BorderRadius.circular(10.0);
 							} else {
-								borderRadius = BorderRadius.circular(40.0);
+								_borderRadius = BorderRadius.circular(40.0);
 							}
 						});
 					},
@@ -35,11 +35,11 @@ class _MessageInputState extends State<MessageInput> {
 						margin: const EdgeInsets.symmetric(horizontal: 12.0),
 						decoration: BoxDecoration(
 							border: Border.all(color: Colors.grey, width: 1),
-							borderRadius: borderRadius,
+							borderRadius: _borderRadius,
 						),
 
 						child: TextField(
-							controller: content,
+							controller: _content,
 							decoration: const InputDecoration(
 								contentPadding: EdgeInsets.only(left: 16),
 								hintText: 'Type a message...',
@@ -55,8 +55,8 @@ class _MessageInputState extends State<MessageInput> {
 								);
 
 								setState(() {
-									content = TextEditingController();
-									borderRadius = BorderRadius.circular(40.0);
+									_content = TextEditingController();
+									_borderRadius = BorderRadius.circular(40.0);
 								});
 							},
 						)
