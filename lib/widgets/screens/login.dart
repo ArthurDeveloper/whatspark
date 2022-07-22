@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../default_app_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'signup.dart';
 import '../../utilities/gradients.dart';
+import 'home.dart';
+import 'recover_password.dart';
 
 class Login extends StatefulWidget {
     const Login({Key? key}) : super(key: key);
@@ -16,18 +19,59 @@ class _LoginState extends State<Login> {
 	final TextEditingController _email = TextEditingController();
 	final TextEditingController _password = TextEditingController();
 
-	void submit() {
+	void submit(BuildContext context) async {
 		final bool isValid = _formKey.currentState!.validate();
 		if (isValid) {
 			_formKey.currentState?.save();
 		}
+
+		FirebaseAuth auth = FirebaseAuth.instance;
+		try {
+			UserCredential credential = await auth.signInWithEmailAndPassword(
+				email: _email.text,
+				password: _password.text
+			);
+
+			if (credential.user != null) {
+				redirectToHome();
+			}
+		} catch (e) {
+			FirebaseAuthException error = e as FirebaseAuthException;
+			print('code: $error.code');
+			
+			SnackBar snackBar = SnackBar(
+				content: Text(error.code == 
+					'wrong-password' ?
+					'Invalid password' :
+						error.code == 'user-not-found' ?
+							'User not found' : 'Something went wrong',
+					style: const TextStyle(color: Colors.white),
+				),
+				backgroundColor: Colors.red,
+			);
+			ScaffoldMessenger.of(context).showSnackBar(snackBar);
+		}
+	}
+
+	void redirectToHome() {
+		Future.delayed(Duration.zero, () {
+			Navigator.pushReplacement(
+				context,
+				MaterialPageRoute(builder: (context) => Home())
+			);
+		});
 	}
 
 	@override
 	Widget build(BuildContext context) {
+		FirebaseAuth auth = FirebaseAuth.instance;
+		if (auth.currentUser != null) {
+			redirectToHome();
+		}
+		
 		return Scaffold(
-			appBar: defaultAppBar('Signup'),
-			body: Form(
+			appBar: defaultAppBar('Login'),
+			body: Form( 
 				key: _formKey,
 				child: Column(
 					mainAxisAlignment: MainAxisAlignment.center,
@@ -78,12 +122,31 @@ class _LoginState extends State<Login> {
 							margin: const EdgeInsets.only(top: 20.0),
 							child: TextButton(
 								onPressed: () {
-									submit();
+									submit(context);
 								}, 
 								child: createTextWithGradient(
 									text: const Text('SUBMIT')
 								),
 							)
+						),
+						Container(
+							margin: const EdgeInsets.only(bottom: 20.0),
+							child: TextButton(
+								onPressed: () {
+									Navigator.pushReplacement(
+										context,
+										MaterialPageRoute(
+											builder: (context) => const RecoverPassword()
+										)
+									);
+								},
+								child: createTextWithGradient(
+									text: const Text('Forgot Password?', style: TextStyle(
+										fontSize: 12.0,
+										fontWeight: FontWeight.w500
+									)),
+								),
+							),
 						),
 						Row(
 							mainAxisAlignment: MainAxisAlignment.center,
@@ -104,7 +167,7 @@ class _LoginState extends State<Login> {
 									)
 								)
 							]
-						)
+						),
 					]
 				),
 			)

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'utilities/theme_notifier.dart';
-import 'widgets/screens/home.dart';
+import 'widgets/screens/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'widgets/screens/login.dart';
@@ -30,8 +30,7 @@ class MyApp extends StatelessWidget {
 							title: 'WhatSpark',
 							theme: notifier.themeMode == ThemeMode.system ?
 									ThemeData.light() : ThemeData.dark(),
-							darkTheme: ThemeData.dark(),
-							home: const Login(),
+							home: Welcome(),
 						);
 					},
 				);

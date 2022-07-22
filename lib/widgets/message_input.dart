@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../utilities/messages_notifier.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import '../widgets/message.dart';
 
 
 class MessageInput extends StatefulWidget {
-  	const MessageInput({Key? key}) : super(key: key);
+	String contactName;
+  	MessageInput({Key? key, required this.contactName }) : super(key: key);
 
   	@override
   	State<MessageInput> createState() => _MessageInputState();
 }
 
 class _MessageInputState extends State<MessageInput> {
+
 	TextEditingController? _content;
 	BorderRadius _borderRadius = BorderRadius.circular(40.0);
+
+	void sendMessage(String content) {
+		DatabaseReference ref = FirebaseDatabase.instance.ref('messages');
+
+		FirebaseAuth auth = FirebaseAuth.instance;
+		ref.push().set({
+			'sender': auth.currentUser!.displayName ?? 'John Doe',
+			'receiver': widget.contactName,
+			'content': content,
+		});
+	}
 
   	@override
   	Widget build(BuildContext context) {
@@ -53,6 +68,8 @@ class _MessageInputState extends State<MessageInput> {
 										time: '00:00'
 									)
 								);
+
+								sendMessage(text);
 
 								setState(() {
 									_content = TextEditingController();
