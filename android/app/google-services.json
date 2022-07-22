@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "301283658967",
+    "firebase_url": "https://whatspark-app-default-rtdb.firebaseio.com",
+    "project_id": "whatspark-app",
+    "storage_bucket": "whatspark-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301283658967:android:560f2422511c3bd97a3492",
+        "android_client_info": {
+          "package_name": "com.example.whatspark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301283658967-cu0p3757ore7ji7rkc8pghkdkpte7jb2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm-X0ftJBYhRICzPz1K39or79Mv0Mlc1M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301283658967-cu0p3757ore7ji7rkc8pghkdkpte7jb2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "301283658967-3il971iho4hign3jsvjhquvm252borq7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.whatspark"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import '../utilities/gradients.dart';
 
-AppBar defaultAppBar(String title, { String? subtitle, Widget? leading, List<Widget>? actions }) {
+AppBar defaultAppBar(String title, { 
+	String? subtitle,
+	Widget? leading,
+	List<Widget>? actions,
+	bool automaticallyImplyLeading = true, 
+}) {
 	return AppBar(
 		title: Column(
 			crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,5 +26,6 @@ AppBar defaultAppBar(String title, { String? subtitle, Widget? leading, List<Wid
 		),
 		leading: leading,
 		actions: actions,
+		automaticallyImplyLeading: automaticallyImplyLeading,
 	);
 }

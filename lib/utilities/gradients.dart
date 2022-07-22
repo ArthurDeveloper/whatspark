@@ -11,8 +11,13 @@ const LinearGradient defaultGradient = LinearGradient(
 	]
 );
 
-Shader createTextGradient({ List<Color>? colors }) {
-	return LinearGradient(
-  		colors: colors ?? defaultGradient.colors,
-	).createShader(const Rect.fromLTWH(0.0, 0.0, 0.0, 0.0));
+Widget createTextWithGradient({ required Text text, LinearGradient? gradient }) {
+	gradient ??= defaultGradient;
+	return ShaderMask(
+		blendMode: BlendMode.srcIn,
+		shaderCallback: (bounds) => gradient!.createShader(
+			Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+		),
+		child: text,
+    );
 }
